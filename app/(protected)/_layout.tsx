@@ -1,12 +1,11 @@
 import { View, Text } from 'react-native';
-import { Slot, useRouter } from 'expo-router';
+import { Slot } from 'expo-router';
+import { useAuth } from '@/context/AuthContext';
 
 export default function ProtectedLayout() {
-  const isAuthenticated = true; // Mocked authentication, always true
+  const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    const router = useRouter();
-    router.replace('/login');
     return null;
   }
 

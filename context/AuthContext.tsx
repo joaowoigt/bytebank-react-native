@@ -8,7 +8,7 @@ interface User {
 interface IAuthContext {
     user: User | null
     users: User[]
-    login: (email: string, password: string) => void
+    login: (email: string, password: string) => boolean
     signUp: (email: string, password: string) => void
     logout: () => void
     isAuthenticated: boolean
@@ -19,26 +19,30 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null)
     const [users, setUsers] = useState<User[]>([])
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     const login = (email: string, password: string) => {
         const foundUser = users.find(u => u.email === email && u.password === password)
         if (foundUser) {
             setUser(user)
+            setIsAuthenticated(true)
             console.log('AuthProvider :: login - usuário logado com sucesso')
-        } else {
-            console.log('AuthProvider :: login - usuário não encontrado')
-        }
+            return true
+        } 
+        console.log('AuthProvider :: login - usuário não encontrado')
+        return false
     }
 
     const signUp = (email: string, password: string) => {
         setUsers([...users, { email, password }])
+        console.log('AuthProvider :: signUp - usuário cadastrado com sucesso')
     }
 
     const logout = () => {
+        console.log('AuthProvider :: logout - usuário deslogado com sucesso')
         setUser(null)
+        setIsAuthenticated(false)
     }
-
-    const isAuthenticated = !!user
 
     return <AuthContext.Provider value={{
         user,
