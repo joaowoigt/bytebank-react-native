@@ -5,7 +5,7 @@ import { useTransaction } from "@/context/TransactionContext";
 
 export default function Profile() {
   const { logout } = useAuth();
-  const { getTransactions, transactions } = useTransaction();
+  const { getTransactions, transactions, addTransactions } = useTransaction();
 
   return (
     <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
@@ -20,6 +20,13 @@ export default function Profile() {
         title="Print transactions"
         onPress={() => {
           console.log("Transactions: ", transactions);
+        }}
+      />
+
+      <Button
+        title="add transactions"
+        onPress={() => {
+          addTransactions("QJPtNiKdBqXvbTipBbICq9Nj2ff1", 2222, "Debit");
         }}
       />
     </View>

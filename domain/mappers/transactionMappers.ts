@@ -21,7 +21,7 @@ export function mapTransactionDBToTransactionResponse(
   };
 }
 
-function getFullDate(apiDate: string): string {
+export function getFullDate(apiDate: string): string {
   const convertedDate = new Date(apiDate);
   const month = convertedDate.getMonth() + 1;
   const year = convertedDate.getFullYear();
@@ -29,9 +29,9 @@ function getFullDate(apiDate: string): string {
   return `${date}/${month}/${year}`;
 }
 
-function getMonthName(apiDate: string): string {
+export function getMonthName(apiDate: string): string {
   const convertedDate = new Date(apiDate);
-  const month = convertedDate.toLocaleString("default", { month: "long" });
+  const month = convertedDate.toLocaleString("pt-br", { month: "long" });
   return month.charAt(0).toUpperCase() + month.slice(1);
 }
 
