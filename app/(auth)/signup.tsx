@@ -6,12 +6,20 @@ import { useAuth } from "@/context/AuthContext";
 export default function Signup() {
   const { signup } = useAuth();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
       <Text style={{ fontSize: 24, marginBottom: 16 }}>Sign Up</Text>
+
+      <TextInput
+        placeholder="Nome"
+        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        value={name}
+        onChangeText={setName}
+      />
 
       <TextInput
         placeholder="Email"
@@ -21,7 +29,7 @@ export default function Signup() {
       />
 
       <TextInput
-        placeholder="Password"
+        placeholder="Senha"
         secureTextEntry
         style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
         value={password}
@@ -31,7 +39,7 @@ export default function Signup() {
       <Button
         title="Sign Up"
         onPress={() => {
-          signup(email, password);
+          signup(email, password, name);
         }}
       />
       <Link href="/login" style={{ marginTop: 16 }}>

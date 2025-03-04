@@ -1,14 +1,8 @@
-import { useAuth } from "@/context/AuthContext";
-import { router } from "expo-router";
-import { View, Text, Button, ScrollView } from "react-native";
-import { useTransaction } from "@/context/TransactionContext";
+import { ScrollView } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Welcome from "./balance";
 
 export default function Profile() {
-  const { logout } = useAuth();
-  const { getTransactions, transactions, addTransactions } = useTransaction();
-
   return (
     <SafeAreaProvider>
       <SafeAreaView
@@ -16,7 +10,7 @@ export default function Profile() {
         edges={["top"]}
       >
         <ScrollView>
-          <Welcome balance={0} name="User" />
+          <Welcome />
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

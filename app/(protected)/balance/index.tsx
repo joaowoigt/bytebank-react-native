@@ -1,32 +1,27 @@
 import { getFullDate } from "@/domain/mappers/transactionMappers";
-import { Theme } from "@/theme";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useTheme } from "@shopify/restyle";
 import { View, Text, StyleSheet } from "react-native";
-import { Image } from "expo-image";
 import SvgComponent from "@/assets/svg/balance";
+import { useTransaction } from "@/context/TransactionContext";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 
-export default function Welcome({
-  balance,
-  name,
-}: {
-  balance: number;
-  name: string;
-}) {
+export default function Welcome() {
+  const { balance, transactions, getTransactions, addTransactions } =
+    useTransaction();
+  const { UID, displayName } = useAuth();
   const date = new Date();
   const fullDate = getFullDate(date.toISOString());
+  useEffect(() => {
+    getTransactions(UID);
+    console.log(transactions);
+  }, []);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.header}>Olá, {name}! :)</Text>
+      <Text style={styles.header}>Olá, {displayName}! :)</Text>
       <Text style={styles.dateText}>{fullDate}</Text>
       <View style={styles.secondaryContainer}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.rowContainer}>
           <Text style={styles.header}>Saldo</Text>
           <AntDesign
             name="eyeo"
@@ -35,14 +30,7 @@ export default function Welcome({
             color="white"
           />
         </View>
-        <View
-          style={{
-            backgroundColor: "white",
-            width: "50%",
-            height: 2,
-            marginVertical: 16,
-          }}
-        ></View>
+        <View style={styles.divider}></View>
         <Text style={styles.body}>Conta corrente</Text>
         <Text style={styles.header}>{balance}</Text>
       </View>
@@ -68,6 +56,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "50%",
     marginStart: "50%",
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  divider: {
+    backgroundColor: "white",
+    width: "50%",
+    height: 2,
+    marginVertical: 16,
   },
 
   header: {
