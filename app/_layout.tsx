@@ -1,8 +1,5 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { ThemeProvider } from "@shopify/restyle";
+import theme from "../theme";
 import { useFonts } from "expo-font";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -37,9 +34,7 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <TransactionProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
+        <ThemeProvider theme={theme}>
           <Stack>
             <Stack.Screen name="+not-found" />
           </Stack>

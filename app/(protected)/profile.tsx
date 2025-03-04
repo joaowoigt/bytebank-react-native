@@ -1,34 +1,24 @@
 import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import { useTransaction } from "@/context/TransactionContext";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import Welcome from "./balance";
 
 export default function Profile() {
   const { logout } = useAuth();
   const { getTransactions, transactions, addTransactions } = useTransaction();
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
-      <Text style={{ fontSize: 24 }}>Profile Page</Text>
-      <Button
-        title="Logout"
-        onPress={() => {
-          getTransactions("QJPtNiKdBqXvbTipBbICq9Nj2ff1");
-        }}
-      />
-      <Button
-        title="Print transactions"
-        onPress={() => {
-          console.log("Transactions: ", transactions);
-        }}
-      />
-
-      <Button
-        title="add transactions"
-        onPress={() => {
-          addTransactions("QJPtNiKdBqXvbTipBbICq9Nj2ff1", 2222, "Debit");
-        }}
-      />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView
+        style={{ flex: 1, padding: 16, height: "100%" }}
+        edges={["top"]}
+      >
+        <ScrollView>
+          <Welcome balance={0} name="User" />
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
