@@ -1,6 +1,7 @@
 import { ScrollView } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Welcome from "./balance";
+import NewTransaction from "./newTransaction";
 
 export default function Profile() {
   return (
@@ -11,6 +12,7 @@ export default function Profile() {
       >
         <ScrollView>
           <Welcome />
+          <NewTransaction />
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

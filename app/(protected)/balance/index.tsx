@@ -5,6 +5,8 @@ import SvgComponent from "@/assets/svg/balance";
 import { useTransaction } from "@/context/TransactionContext";
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { textStyles } from "@/ui/styles/TextStyles";
+import BalanceImage from "@/assets/svg/balance";
 
 export default function Welcome() {
   const { balance, transactions, getTransactions, addTransactions } =
@@ -18,11 +20,11 @@ export default function Welcome() {
   }, []);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.header}>Olá, {displayName}! :)</Text>
-      <Text style={styles.dateText}>{fullDate}</Text>
+      <Text style={textStyles.header}>Olá, {displayName}! :)</Text>
+      <Text style={textStyles.small}>{fullDate}</Text>
       <View style={styles.secondaryContainer}>
         <View style={styles.rowContainer}>
-          <Text style={styles.header}>Saldo</Text>
+          <Text style={textStyles.large}>Saldo</Text>
           <AntDesign
             name="eyeo"
             style={{ marginTop: 20, marginStart: 32 }}
@@ -31,10 +33,10 @@ export default function Welcome() {
           />
         </View>
         <View style={styles.divider}></View>
-        <Text style={styles.body}>Conta corrente</Text>
-        <Text style={styles.header}>{balance}</Text>
+        <Text style={textStyles.body}>Conta corrente</Text>
+        <Text style={textStyles.large}>{balance}</Text>
       </View>
-      <SvgComponent />
+      <BalanceImage />
     </View>
   );
 }
@@ -67,19 +69,5 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 2,
     marginVertical: 16,
-  },
-
-  header: {
-    fontSize: 24,
-    color: "white",
-    marginTop: 16,
-  },
-  dateText: {
-    fontSize: 16,
-    color: "white",
-  },
-  body: {
-    fontSize: 20,
-    color: "white",
   },
 });
