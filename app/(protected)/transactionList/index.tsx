@@ -1,4 +1,6 @@
+import { useAuth } from "@/context/AuthContext";
 import { useTransaction } from "@/context/TransactionContext";
+import Button from "@/ui/components/Button";
 import DropDown from "@/ui/components/DropDown";
 import TransactionItem from "@/ui/components/TransactionItem";
 import { textStyles } from "@/ui/styles/TextStyles";
@@ -12,7 +14,8 @@ const dropDownItems = [
 ];
 
 export default function TransactionList() {
-  const { getFilteredList } = useTransaction();
+  const { getFilteredList, editTransaction } = useTransaction();
+  const { UID } = useAuth();
   const [fillter, setFillter] = useState("all");
 
   let filteredList = getFilteredList(fillter);
@@ -27,6 +30,12 @@ export default function TransactionList() {
       {filteredList.map((transaction) => (
         <TransactionItem {...transaction} key={transaction.id} />
       ))}
+      <Button
+        title="editar"
+        onPress={() => {
+          editTransaction(UID, 1, 666, "credit");
+        }}
+      />
     </View>
   );
 }

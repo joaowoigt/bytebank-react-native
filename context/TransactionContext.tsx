@@ -14,6 +14,12 @@ interface ITransactionContext {
     value: number,
     type: string
   ) => Promise<boolean>;
+  editTransaction: (
+    userId: string,
+    id: number,
+    value: number,
+    type: string
+  ) => void;
 }
 
 const TransactionContext = createContext<ITransactionContext | undefined>(
@@ -98,6 +104,55 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     }
     return transactions.filter((transaction) => transaction.type === type);
   };
+
+  const editTransaction = async (
+    userId: string,
+    id: number,
+    newValue: number,
+    newType: string
+  ) => {
+    transactions.forEach((transction) => {
+      console.log("transacao" + transction.id);
+    });
+    const oldTransaction = transactions.find(({ id }) => id == 1);
+    console.log("Velha" + oldTransaction);
+    if (!oldTransaction) {
+      return;
+    }
+    const formatter = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+    const formattedValue = formatter.format(newValue);
+
+    const newTransaction = {
+      accountId: oldTransaction.accountId,
+      date: oldTransaction.date,
+      fullDate: oldTransaction.fullDate,
+      id: id,
+      month: oldTransaction.month,
+      valueNumber: newType === "credit" ? newValue : newValue * -1,
+      formattedValue:
+        newType === "credit" ? formattedValue : "-" + formattedValue,
+      type: newType,
+    };
+    const updatedTransactions = transactions.map((transaction) => {
+      if (transaction.id === id) {
+        return newTransaction;
+      }
+      return transaction;
+    });
+    const docRef = doc(db, "user-transactions", userId);
+    await setDoc(docRef, { transactions: updatedTransactions })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+    setTransactions(updatedTransactions);
+    setBalance(getBalance(updatedTransactions));
+  };
   return (
     <TransactionContext.Provider
       value={{
@@ -106,6 +161,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
         addTransactions,
         getTransactions,
         getFilteredList,
+        editTransaction,
       }}
     >
       {children}
