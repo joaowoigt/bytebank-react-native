@@ -8,7 +8,7 @@ interface ITransactionContext {
   transactions: Transaction[];
   balance: string;
   getTransactions: (userId: string) => void;
-  addTransactions: (userId: string, value: number, type: string) => void;
+  addTransactions: (userId: string, value: number, type: string) => boolean;
 }
 
 const TransactionContext = createContext<ITransactionContext | undefined>(
@@ -70,6 +70,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
           });
         setTransactions(updatedTransactions);
         setBalance(getBalance(updatedTransactions));
+        return true;
       } else {
         console.log("No such document yet! Creating new document...");
         const newTransaction = createNewTransaction(value, type, userId, 1);
@@ -78,9 +79,11 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
         setTransactions([newTransaction]);
         setBalance(getBalance([newTransaction]));
         console.log("Document written : ", newDoc);
+        return true;
       }
     } catch (error) {
       console.error("Error adding document:", error);
+      return false;
     }
   };
   return (

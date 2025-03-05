@@ -35,7 +35,7 @@ export function getMonthName(apiDate: string): string {
   return month.charAt(0).toUpperCase() + month.slice(1);
 }
 
-function getNameForScreen(type: string): string {
+export function getNameForScreen(type: string): string {
   switch (type) {
     case "Credit":
       return "Crédito";

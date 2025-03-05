@@ -6,4 +6,5 @@ export type Transaction = {
   fullDate: string;
   valueNumber: number;
   date: string;
+  formattedValue: string;
 };

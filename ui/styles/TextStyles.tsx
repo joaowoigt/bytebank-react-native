@@ -7,6 +7,12 @@ export const textStyles = StyleSheet.create({
     marginTop: 16,
     fontWeight: "bold",
   },
+  headerPrimary: {
+    fontSize: 24,
+    color: "#004D61",
+    marginTop: 16,
+    fontWeight: "bold",
+  },
   large: {
     fontSize: 24,
     marginTop: 16,

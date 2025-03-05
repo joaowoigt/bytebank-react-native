@@ -48,7 +48,24 @@ export default function NewTransaction() {
             );
             return;
           }
-          addTransactions(UID, parseFloat(selectedValue!) / 100, selectedType);
+          const success = addTransactions(
+            UID,
+            parseFloat(selectedValue!) / 100,
+            selectedType
+          );
+          if (success) {
+            setSelectedValue("");
+            setSelectedType("Selecione o tipo da transação");
+            ToastAndroid.show(
+              "Transação realizada com sucesso",
+              ToastAndroid.SHORT
+            );
+          } else {
+            ToastAndroid.show(
+              "Algo deu errado tente novamente mais tarde!",
+              ToastAndroid.SHORT
+            );
+          }
         }}
       />
       <NewTransactionImage />
