@@ -6,6 +6,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 interface ITransactionContext {
   transactions: Transaction[];
+  getFilteredList: (type: string) => Transaction[];
   balance: string;
   getTransactions: (userId: string) => void;
   addTransactions: (
@@ -90,6 +91,13 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
       return false;
     }
   };
+
+  const getFilteredList = (type: string) => {
+    if (type === "all") {
+      return transactions;
+    }
+    return transactions.filter((transaction) => transaction.type === type);
+  };
   return (
     <TransactionContext.Provider
       value={{
@@ -97,6 +105,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
         balance,
         addTransactions,
         getTransactions,
+        getFilteredList,
       }}
     >
       {children}
