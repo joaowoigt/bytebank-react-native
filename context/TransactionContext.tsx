@@ -8,7 +8,11 @@ interface ITransactionContext {
   transactions: Transaction[];
   balance: string;
   getTransactions: (userId: string) => void;
-  addTransactions: (userId: string, value: number, type: string) => boolean;
+  addTransactions: (
+    userId: string,
+    value: number,
+    type: string
+  ) => Promise<boolean>;
 }
 
 const TransactionContext = createContext<ITransactionContext | undefined>(
@@ -121,8 +125,8 @@ function createNewTransaction(
     fullDate: fullDate,
     id: id,
     month: month,
-    valueNumber: type === "Credit" ? value : value * -1,
-    formattedValue: formattedValue,
+    valueNumber: type === "credit" ? value : value * -1,
+    formattedValue: type === "credit" ? formattedValue : "-" + formattedValue,
     type,
   };
 }
