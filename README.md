@@ -1,26 +1,13 @@
 Olá, seja bem vindo ao resultado do meu Tech Challenge ✌️. Meu nome é João Woigt, meu é rm356898, você pode ler mais sobre mim no final deste ReadMe na sessão Sobre o desenvolvedor
-Olá, seja bem vindo ao resultado do meu Tech Challenge ✌️. Meu nome é João Woigt, meu é rm356898, você pode ler mais sobre mim no final deste ReadMe na sessão Sobre o desenvolvedor
 
 ## Iniciando o projeto
 
-## Iniciando o projeto
-
-### Via terminal
-
-### Via terminal
-
-Apos clonar o projeto, no terminal dentro da pasta rode o comando para instalar as dependencias:
 Apos clonar o projeto, no terminal dentro da pasta rode o comando para instalar as dependencias:
 
 ```bash
 npm install
 ```
 
-```bash
-npm install
-```
-
-Em seguida, será necessário ter algum simulador de celular rodando em seu computador no momento. Rode o comando:
 Em seguida, será necessário ter algum simulador de celular rodando em seu computador no momento. Rode o comando:
 
 ```bash
