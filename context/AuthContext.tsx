@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         password
       );
       setUID(userCredential.user.uid);
-      console.log("name: ", userCredential.user.displayName);
       if (userCredential.user.displayName) {
         setDisplayName(userCredential.user.displayName);
       } else {

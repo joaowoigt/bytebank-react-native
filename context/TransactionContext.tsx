@@ -50,6 +50,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       console.error("Error getting document:", error);
+      setBalance("R$ 0,00");
     }
   };
 
@@ -111,7 +112,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     newValue: number,
     newType: string
   ) => {
-    const oldTransaction = transactions.find(({ id }) => id == 1);
+    const oldTransaction = transactions.find((item) => item.id == id);
     if (!oldTransaction) {
       return false;
     }

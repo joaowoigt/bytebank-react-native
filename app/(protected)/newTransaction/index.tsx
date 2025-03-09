@@ -16,6 +16,35 @@ export default function NewTransaction() {
   const { addTransactions } = useTransaction();
   const { UID } = useAuth();
   const [selectedValue, setSelectedValue] = useState<string | undefined>("");
+  const createNewTransaction = () => {
+    if (
+      selectedType === "none" ||
+      selectedValue === "" ||
+      selectedValue === "0"
+    ) {
+      ToastAndroid.show(
+        "Preencha todos os campos corretamente",
+        ToastAndroid.SHORT
+      );
+      return;
+    }
+    const success = addTransactions(
+      UID,
+      parseFloat(selectedValue!) / 100,
+      selectedType
+    );
+    if (success) {
+      setSelectedValue("");
+      setSelectedType("Selecione o tipo da transação");
+      ToastAndroid.show("Transação realizada com sucesso", ToastAndroid.SHORT);
+    } else {
+      ToastAndroid.show(
+        "Algo deu errado tente novamente mais tarde!",
+        ToastAndroid.SHORT
+      );
+    }
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Text style={textStyles.header}>Nova transação</Text>
@@ -31,37 +60,7 @@ export default function NewTransaction() {
       />
       <Button
         title="Concluir transação"
-        onPress={() => {
-          if (
-            selectedType === "none" ||
-            selectedValue === "" ||
-            selectedValue === "0"
-          ) {
-            ToastAndroid.show(
-              "Preencha todos os campos corretamente",
-              ToastAndroid.SHORT
-            );
-            return;
-          }
-          const success = addTransactions(
-            UID,
-            parseFloat(selectedValue!) / 100,
-            selectedType
-          );
-          if (success) {
-            setSelectedValue("");
-            setSelectedType("Selecione o tipo da transação");
-            ToastAndroid.show(
-              "Transação realizada com sucesso",
-              ToastAndroid.SHORT
-            );
-          } else {
-            ToastAndroid.show(
-              "Algo deu errado tente novamente mais tarde!",
-              ToastAndroid.SHORT
-            );
-          }
-        }}
+        onPress={() => createNewTransaction()}
       />
       <NewTransactionImage />
     </View>

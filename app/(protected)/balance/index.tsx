@@ -1,7 +1,6 @@
 import { getFullDate } from "@/domain/mappers/transactionMappers";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { View, Text, StyleSheet } from "react-native";
-import SvgComponent from "@/assets/svg/balance";
 import { useTransaction } from "@/context/TransactionContext";
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
@@ -9,14 +8,12 @@ import { textStyles } from "@/ui/styles/TextStyles";
 import BalanceImage from "@/assets/svg/balance";
 
 export default function Welcome() {
-  const { balance, transactions, getTransactions, addTransactions } =
-    useTransaction();
+  const { balance, getTransactions } = useTransaction();
   const { UID, displayName } = useAuth();
   const date = new Date();
   const fullDate = getFullDate(date.toISOString());
   useEffect(() => {
     getTransactions(UID);
-    console.log(transactions);
   }, []);
   return (
     <View style={styles.mainContainer}>

@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@shopify/restyle";
 import theme from "../theme";
 import { useFonts } from "expo-font";
 import { Stack, useRouter } from "expo-router";
@@ -31,11 +30,9 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <TransactionProvider>
-        <ThemeProvider theme={theme}>
-          <Stack>
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </ThemeProvider>
+        <Stack>
+          <Stack.Screen name="+not-found" />
+        </Stack>
       </TransactionProvider>
     </AuthProvider>
   );

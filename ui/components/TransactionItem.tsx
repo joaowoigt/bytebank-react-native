@@ -1,7 +1,7 @@
 import { Transaction } from "@/domain/models/Transaction";
 import { useState } from "react";
 import { Text, View, StyleSheet, Modal, Pressable } from "react-native";
-import EditModal from "./modal";
+import EditModal from "./ModalContent";
 
 export default function TransactionItem(transaction: Transaction) {
   const [modalVisible, setModalVisible] = useState(false);
