@@ -1,50 +1,32 @@
-# Welcome to your Expo app 👋
+Olá, seja bem vindo ao resultado do meu Tech Challenge ✌️. Meu nome é João Woigt, meu é rm356898, você pode ler mais sobre mim no final deste ReadMe na sessão Sobre o desenvolvedor
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Iniciando o projeto
 
-## Get started
+### Via terminal
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Apos clonar o projeto, no terminal dentro da pasta rode o comando para instalar as dependencias:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Em seguida, será necessário ter algum simulador de celular rodando em seu computador no momento. Rode o comando:
 
-## Learn more
+```bash
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Apos completar o processo, prescione **A** para iniciar o projeto em seu simulador
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Utilizado no projeto
 
-## Join the community
+- React Native
+- Expo
+- Firebase (auth e cloudstore)
+- Context Api
+- TypeScript
 
-Join our community of developers creating universal apps.
+## Sobre o desenvolvedor
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Olá, meu nome é João Woigt, sou desenvolvedor deste 2020 quando decidi fazer a transição da minha area de estudo (Ciências Socias) para a programação a fim de encontrar melhores oportunidades. Participei de diversos bootcamps, em destaque O Santander Bootcampo | Mobile developer e o curso da Ada Tech Web full-stack. Hoje me especializo em desenvolvimento mobile, com foco em Android e Kotlin multiplataforma. Atuo faz 4 anos na area, tendo passado por projetos como Rock in Rio, Banco Pan e Stone, onde me encontro empregado atualmente.
+Fique a vontade para se conectar em meu [Linkedin](https://www.linkedin.com/in/joaowoigt/)

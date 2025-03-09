@@ -8,6 +8,7 @@ import { dropDownItems } from "../data/DropDownItems";
 import DropDown from "./DropDown";
 import { useAuth } from "@/context/AuthContext";
 import { useTransaction } from "@/context/TransactionContext";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function EditModal({
   transaction,
@@ -33,10 +34,21 @@ export default function EditModal({
       );
       return;
     }
+    const newValueParsed = parseFloat(newValue!) / 100;
+    if (
+      newValueParsed === transaction.valueNumber &&
+      newType === transaction.type
+    ) {
+      ToastAndroid.show(
+        "Altere os valores para poder editar!!",
+        ToastAndroid.SHORT
+      );
+      return;
+    }
     const success = editTransaction(
       UID,
       transaction.id,
-      parseFloat(newValue!) / 100,
+      newValueParsed,
       newType
     );
     if (success) {
@@ -52,6 +64,10 @@ export default function EditModal({
   return (
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
+        <Pressable style={styles.close} onPress={() => onClose()}>
+          <FontAwesome name="close" size={24} color="#004D61" />
+        </Pressable>
+
         <Text style={textStyles.headerPrimary}>Editar transação</Text>
         <CurrencyInputComponent value={newValue} setValue={setNewValue} />
         <DropDown
@@ -95,12 +111,8 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
+  close: {
+    width: "100%",
+    alignItems: "flex-start",
   },
 });

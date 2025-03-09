@@ -22,7 +22,6 @@ export default function CurrencyInputComponent({
       keyboardType="numeric"
       value={value}
       onChangeText={(formated, extracted) => {
-        console.log("formated", formated, "extracted", extracted);
         setValue(extracted);
       }}
     />
