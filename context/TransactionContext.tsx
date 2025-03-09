@@ -19,7 +19,7 @@ interface ITransactionContext {
     id: number,
     value: number,
     type: string
-  ) => void;
+  ) => Promise<boolean>;
 }
 
 const TransactionContext = createContext<ITransactionContext | undefined>(
@@ -111,13 +111,9 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     newValue: number,
     newType: string
   ) => {
-    transactions.forEach((transction) => {
-      console.log("transacao" + transction.id);
-    });
     const oldTransaction = transactions.find(({ id }) => id == 1);
-    console.log("Velha" + oldTransaction);
     if (!oldTransaction) {
-      return;
+      return false;
     }
     const formatter = new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -149,9 +145,11 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch((error) => {
         console.error("Error writing document: ", error);
+        return false;
       });
     setTransactions(updatedTransactions);
     setBalance(getBalance(updatedTransactions));
+    return true;
   };
   return (
     <TransactionContext.Provider

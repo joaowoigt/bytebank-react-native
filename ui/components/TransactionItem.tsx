@@ -1,17 +1,36 @@
 import { Transaction } from "@/domain/models/Transaction";
-import { Text, View, StyleSheet } from "react-native";
+import { useState } from "react";
+import { Text, View, StyleSheet, Modal, Pressable } from "react-native";
+import EditModal from "./modal";
 
 export default function TransactionItem(transaction: Transaction) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const typeFormatted = transaction.type === "debit" ? "Débito" : "Crédito";
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.monthText}>{transaction.month}</Text>
-      <View style={styles.rowContainer}>
-        <Text style={styles.body}>{typeFormatted}</Text>
-        <Text style={styles.body}>{transaction.fullDate}</Text>
-      </View>
-      <Text style={styles.bodyBold}>{transaction.formattedValue}</Text>
-      <View style={styles.divider}></View>
+      <Pressable onPress={() => setModalVisible(true)}>
+        <Text style={styles.monthText}>{transaction.month}</Text>
+        <View style={styles.rowContainer}>
+          <Text style={styles.body}>{typeFormatted}</Text>
+          <Text style={styles.body}>{transaction.fullDate}</Text>
+        </View>
+        <Text style={styles.bodyBold}>{transaction.formattedValue}</Text>
+        <View style={styles.divider}></View>
+      </Pressable>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <EditModal
+          transaction={transaction}
+          onClose={() => setModalVisible(false)}
+        ></EditModal>
+      </Modal>
     </View>
   );
 }

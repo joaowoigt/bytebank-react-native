@@ -4,15 +4,10 @@ import { useTransaction } from "@/context/TransactionContext";
 import Button from "@/ui/components/Button";
 import CurrencyInputComponent from "@/ui/components/CurrencyInput";
 import DropDown from "@/ui/components/DropDown";
+import { dropDownItems } from "@/ui/data/DropDownItems";
 import { textStyles } from "@/ui/styles/TextStyles";
 import { useState } from "react";
 import { View, Text, StyleSheet, ToastAndroid } from "react-native";
-
-const dropDownItems = [
-  { label: "Selecione o tipo da transação", value: "none" },
-  { label: "Debito", value: "debit" },
-  { label: "Credito", value: "credit" },
-];
 
 export default function NewTransaction() {
   const [selectedType, setSelectedType] = useState(

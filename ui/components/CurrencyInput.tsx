@@ -32,7 +32,7 @@ export default function CurrencyInputComponent({
 const styles = StyleSheet.create({
   input: {
     backgroundColor: "white",
-    width: "50%",
+    width: "80%",
     borderRadius: 8,
     borderColor: "#004D61",
     padding: 8,
