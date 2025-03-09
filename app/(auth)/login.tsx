@@ -1,8 +1,12 @@
-import { View, Text, Button, TextInput } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { router } from "expo-router";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import Button from "@/ui/components/Button";
+import { textStyles } from "@/ui/styles/TextStyles";
+import Logo from "@/assets/svg/logo";
+import BalanceImage from "@/assets/svg/balance";
 
 export default function Login() {
   const { login } = useAuth();
@@ -11,36 +15,66 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
-      <Text style={{ fontSize: 24, marginBottom: 16 }}>Login</Text>
+    <View style={styles.mainContainer}>
+      <BalanceImage />
+      <Text style={textStyles.headerPrimary}>Login</Text>
 
       <TextInput
         placeholder="Email"
-        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        style={styles.input}
         value={email}
         onChangeText={setEmail}
       />
 
       <TextInput
-        placeholder="Password"
+        placeholder="Senha"
         secureTextEntry
-        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        style={styles.input}
         value={password}
         onChangeText={setPassword}
       />
 
-      <Button
-        title="Login"
-        onPress={() => {
-          const isAuthenticated = login(email, password);
-          if (isAuthenticated) {
-            router.replace("/(protected)/dashboard");
-          }
-        }}
-      />
-      <Link href="/signup" style={{ marginTop: 16 }}>
-        Don't have an account? Sign up
-      </Link>
+      <View style={styles.bottomContainer}>
+        <Button
+          title="Acessar"
+          onPress={() => {
+            const isAuthenticated = login(email, password);
+            if (isAuthenticated) {
+              router.replace("/(protected)/dashboard");
+            }
+          }}
+        />
+        <Link href="/signup" style={{ marginTop: 16 }}>
+          Ainda não tem uma conta? Cadastre-se!
+        </Link>
+        <Logo style={styles.logo} />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "#CBCBCB",
+  },
+  input: {
+    borderWidth: 1,
+    marginVertical: 16,
+    padding: 8,
+    width: "100%",
+    borderColor: "#004D61",
+    borderRadius: 8,
+  },
+  bottomContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    marginTop: 64,
+  },
+});
