@@ -1,7 +1,11 @@
-import { View, Text, Button, TextInput } from "react-native";
-import { Link, router } from "expo-router";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import Button from "@/ui/components/Button";
+import { textStyles } from "@/ui/styles/TextStyles";
+import SignInImage from "@/assets/svg/signInImage";
+import Logo from "@/assets/svg/logo";
 
 export default function Signup() {
   const { signup } = useAuth();
@@ -11,19 +15,19 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
-      <Text style={{ fontSize: 24, marginBottom: 16 }}>Sign Up</Text>
+    <View style={styles.mainContainer}>
+      <Text style={textStyles.headerPrimary}>Cadastre-se!</Text>
 
       <TextInput
         placeholder="Nome"
-        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        style={styles.input}
         value={name}
         onChangeText={setName}
       />
 
       <TextInput
         placeholder="Email"
-        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        style={styles.input}
         value={email}
         onChangeText={setEmail}
       />
@@ -31,20 +35,45 @@ export default function Signup() {
       <TextInput
         placeholder="Senha"
         secureTextEntry
-        style={{ borderWidth: 1, marginBottom: 16, padding: 8 }}
+        style={styles.input}
         value={password}
         onChangeText={setPassword}
       />
 
       <Button
-        title="Sign Up"
+        title="Finalizar cadastro"
         onPress={() => {
           signup(email, password, name);
         }}
       />
       <Link href="/login" style={{ marginTop: 16 }}>
-        Already have an account? Log in
+        Ja tem uma conta? Acesse o app!!
       </Link>
+      <SignInImage />
+      <Logo />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "#CBCBCB",
+  },
+  input: {
+    borderWidth: 1,
+    marginVertical: 16,
+    padding: 8,
+    width: "100%",
+    borderColor: "#004D61",
+    borderRadius: 8,
+  },
+  bottomContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
