@@ -1,14 +1,5 @@
 import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
 import { Firestore, getFirestore } from "firebase/firestore";
-import {
-  API_KEY,
-  AUTH_DOMAIN,
-  DATABASE_URL,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID,
-} from "@env";
 
 import {
   Auth,
@@ -18,6 +9,14 @@ import {
   getReactNativePersistence,
 } from "firebase/auth";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+
+const API_KEY = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const AUTH_DOMAIN = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const DATABASE_URL = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const PROJECT_ID = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const STORAGE_BUCKET = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const MESSAGING_SENDER_ID = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
+const APP_ID = "ADICIONE AQUI SUAS INFOS DO FIREBASE";
 
 const firebaseConfig = {
   apiKey: API_KEY,
